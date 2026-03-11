@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="plant_green">#3A7D44</color>
+    <color name="plant_green_dark">#24512C</color>
+    <color name="plant_cream">#F7F4EA</color>
+    <color name="plant_surface">#FFFDF7</color>
+    <color name="plant_brown">#6F5E53</color>
+    <color name="plant_warning">#C26D00</color>
+    <color name="plant_error">#B3261E</color>
+</resources>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/plantsFragment">
+
+    <fragment
+        android:id="@+id/plantsFragment"
+        android:name="com.asagiry.plantdiary.ui.plants.PlantsFragment"
+        android:label="@string/plants_title">
+        <action
+            android:id="@+id/action_plantsFragment_to_plantFormFragment"
+            app:destination="@id/plantFormFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/plantFormFragment"
+        android:name="com.asagiry.plantdiary.ui.plants.PlantFormFragment"
+        android:label="@string/add_plant" />
+
+    <fragment
+        android:id="@+id/careRecordsFragment"
+        android:name="com.asagiry.plantdiary.ui.care.CareRecordsFragment"
+        android:label="@string/care_title">
+        <action
+            android:id="@+id/action_careRecordsFragment_to_careFormFragment"
+            app:destination="@id/careFormFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/careFormFragment"
+        android:name="com.asagiry.plantdiary.ui.care.CareFormFragment"
+        android:label="@string/add_care_record" />
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.asagiry.plantdiary.ui.schedule.ScheduleFragment"
+        android:label="@string/schedule_title" />
+
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.asagiry.plantdiary.ui.help.HelpFragment"
+        android:label="@string/help_title" />
+</navigation>
+
