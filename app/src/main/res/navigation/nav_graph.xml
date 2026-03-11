@@ -10,7 +10,11 @@
         android:label="@string/plants_title">
         <action
             android:id="@+id/action_plantsFragment_to_plantFormFragment"
-            app:destination="@id/plantFormFragment" />
+            app:destination="@id/plantFormFragment"
+            app:enterAnim="@anim/nav_enter"
+            app:exitAnim="@anim/nav_exit"
+            app:popEnterAnim="@anim/nav_pop_enter"
+            app:popExitAnim="@anim/nav_pop_exit" />
     </fragment>
 
     <fragment
@@ -24,7 +28,11 @@
         android:label="@string/care_title">
         <action
             android:id="@+id/action_careRecordsFragment_to_careFormFragment"
-            app:destination="@id/careFormFragment" />
+            app:destination="@id/careFormFragment"
+            app:enterAnim="@anim/nav_enter"
+            app:exitAnim="@anim/nav_exit"
+            app:popEnterAnim="@anim/nav_pop_enter"
+            app:popExitAnim="@anim/nav_pop_exit" />
     </fragment>
 
     <fragment
@@ -42,4 +50,3 @@
         android:name="com.asagiry.plantdiary.ui.help.HelpFragment"
         android:label="@string/help_title" />
 </navigation>
-

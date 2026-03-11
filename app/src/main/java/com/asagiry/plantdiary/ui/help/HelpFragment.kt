@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.asagiry.plantdiary.databinding.FragmentHelpBinding
+import com.asagiry.plantdiary.ui.common.playEntranceMotion
 
 class HelpFragment : Fragment() {
     private var _binding: FragmentHelpBinding? = null
@@ -18,6 +19,11 @@ class HelpFragment : Fragment() {
     ): View {
         _binding = FragmentHelpBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.helpContent.playEntranceMotion()
     }
 
     override fun onDestroyView() {

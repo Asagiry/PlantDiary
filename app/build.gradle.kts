@@ -46,6 +46,17 @@ android {
     }
 }
 
+val renameDebugApk by tasks.registering(Copy::class) {
+    dependsOn("assembleDebug")
+    from(layout.projectDirectory.file("build/outputs/apk/debug/app-debug.apk"))
+    into(layout.buildDirectory.dir("renamed-apk"))
+    rename("app-debug.apk", "PlantDiary-debug.apk")
+}
+
+tasks.matching { it.name == "assembleDebug" }.configureEach {
+    finalizedBy(renameDebugApk)
+}
+
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 

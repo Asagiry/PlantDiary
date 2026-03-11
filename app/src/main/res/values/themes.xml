@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.PlantDiary" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/plant_green</item>
+        <item name="colorPrimary">@color/plant_green_dark</item>
         <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorPrimaryContainer">@color/plant_cream</item>
+        <item name="colorPrimaryContainer">@color/plant_green_soft</item>
         <item name="colorOnPrimaryContainer">@color/plant_green_dark</item>
-        <item name="colorSecondary">@color/plant_brown</item>
+        <item name="colorSecondary">@color/plant_green</item>
         <item name="colorOnSecondary">@android:color/white</item>
-        <item name="colorSecondaryContainer">@color/plant_cream</item>
+        <item name="colorSecondaryContainer">@color/plant_surface_alt</item>
+        <item name="colorOnSecondaryContainer">@color/plant_ink</item>
         <item name="colorSurface">@color/plant_surface</item>
+        <item name="colorSurfaceVariant">@color/plant_surface_alt</item>
+        <item name="colorOnSurface">@color/plant_ink</item>
+        <item name="colorOnSurfaceVariant">@color/plant_muted</item>
+        <item name="colorOutline">@color/plant_outline</item>
+        <item name="colorTertiary">@color/plant_gold</item>
+        <item name="colorOnTertiary">@color/plant_green_dark</item>
+        <item name="android:windowBackground">@drawable/bg_screen_gradient</item>
         <item name="android:statusBarColor">@color/plant_green_dark</item>
+        <item name="android:navigationBarColor">@color/plant_surface_panel</item>
     </style>
 </resources>

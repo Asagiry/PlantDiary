@@ -2,19 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/plantsFragment"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:icon="@drawable/ic_plant_leaf"
         android:title="@string/nav_plants" />
     <item
         android:id="@+id/careRecordsFragment"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/ic_water_24"
         android:title="@string/nav_care" />
     <item
         android:id="@+id/scheduleFragment"
-        android:icon="@android:drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_calendar_24"
         android:title="@string/nav_schedule" />
     <item
         android:id="@+id/helpFragment"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@drawable/ic_help_24"
         android:title="@string/nav_help" />
 </menu>
-

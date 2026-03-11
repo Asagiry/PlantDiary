@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: plant-diary-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/renamed-apk/PlantDiary-debug.apk
           if-no-files-found: error
 
   release-debug-apk:
@@ -70,5 +70,5 @@ jobs:
       - name: Publish GitHub release asset
         uses: softprops/action-gh-release@v2
         with:
-          files: release-artifacts/app-debug.apk
+          files: release-artifacts/PlantDiary-debug.apk
           generate_release_notes: true

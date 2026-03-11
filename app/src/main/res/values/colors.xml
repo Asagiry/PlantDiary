@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="plant_green">#3A7D44</color>
-    <color name="plant_green_dark">#24512C</color>
-    <color name="plant_cream">#F7F4EA</color>
-    <color name="plant_surface">#FFFDF7</color>
-    <color name="plant_brown">#6F5E53</color>
-    <color name="plant_leaf_accent">#88B04B</color>
+    <color name="plant_green">#2E5A40</color>
+    <color name="plant_green_dark">#173126</color>
+    <color name="plant_green_soft">#DDECD4</color>
+    <color name="plant_cream">#F7F1E6</color>
+    <color name="plant_surface">#FFFDF8</color>
+    <color name="plant_surface_panel">#FFFBF4</color>
+    <color name="plant_surface_alt">#F0E8D8</color>
+    <color name="plant_ink">#19231D</color>
+    <color name="plant_muted">#5F6E62</color>
+    <color name="plant_outline">#CBD5C3</color>
+    <color name="plant_leaf_accent">#8FB86B</color>
+    <color name="plant_gold">#D5AE62</color>
+    <color name="plant_white_soft">#FFF8EE</color>
 </resources>

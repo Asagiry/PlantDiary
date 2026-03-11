@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.databinding.FragmentCareFormBinding
 import com.asagiry.plantdiary.ui.common.labelRes
+import com.asagiry.plantdiary.ui.common.playEntranceMotion
 import com.asagiry.plantdiary.ui.common.showDatePicker
 import com.asagiry.plantdiary.ui.common.showTimePicker
 import com.google.android.material.appbar.MaterialToolbar
@@ -43,6 +45,20 @@ class CareFormFragment : Fragment() {
         val editing = arguments?.getLong(CareFormViewModel.ARG_CARE_RECORD_ID, 0L) != 0L
         requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title =
             getString(if (editing) R.string.edit_care_record else R.string.add_care_record)
+        binding.careGuidanceAction.setOnClickListener {
+            findNavController().navigate(
+                R.id.plantFormFragment,
+                null,
+                navOptions {
+                    anim {
+                        enter = R.anim.nav_enter
+                        exit = R.anim.nav_exit
+                        popEnter = R.anim.nav_pop_enter
+                        popExit = R.anim.nav_pop_exit
+                    }
+                },
+            )
+        }
 
         viewModel.plantChoices.observe(viewLifecycleOwner) { plants ->
             currentPlants = plants
@@ -52,10 +68,12 @@ class CareFormFragment : Fragment() {
             val selector: AutoCompleteTextView = binding.plantSelector
             selector.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, labels))
             updatePlantSelectorText()
+            renderFormState()
         }
 
         viewModel.selectedPlantId.observe(viewLifecycleOwner) {
             updatePlantSelectorText()
+            renderFormState()
         }
 
         binding.plantSelector.setOnItemClickListener { _, _, position, _ ->
@@ -83,6 +101,7 @@ class CareFormFragment : Fragment() {
                 }
             }
         }
+        binding.careFormContent.playEntranceMotion()
     }
 
     override fun onDestroyView() {
@@ -97,5 +116,39 @@ class CareFormFragment : Fragment() {
                 getString(R.string.record_for, plant.name, getString(plant.type.labelRes()))
             }.orEmpty()
         binding.plantSelector.setText(value, false)
+    }
+
+    private fun renderFormState() {
+        val selectedPlant = currentPlants.firstOrNull { it.id == viewModel.selectedPlantId.value }
+        val hasPlants = currentPlants.isNotEmpty()
+        val hasSelectedPlant = selectedPlant != null
+        val isGardenPlant = selectedPlant?.type == com.asagiry.plantdiary.data.local.entity.PlantType.GARDEN
+
+        binding.plantSelectorLayout.isEnabled = hasPlants
+        binding.plantSelector.isEnabled = hasPlants
+        binding.pickNextWateringButton.isEnabled = hasSelectedPlant
+        binding.pickCarePlantingDateButton.isEnabled = isGardenPlant
+        binding.pickCarePlantingTimeButton.isEnabled = isGardenPlant
+        binding.saveCareRecordButton.isEnabled = hasSelectedPlant
+
+        when {
+            !hasPlants -> {
+                binding.careGuidanceCard.visibility = View.VISIBLE
+                binding.careGuidanceTitle.text = getString(R.string.empty_care_no_plants_title)
+                binding.careGuidanceMessage.text = getString(R.string.empty_care_no_plants_message)
+                binding.careGuidanceAction.visibility = View.VISIBLE
+            }
+
+            !hasSelectedPlant -> {
+                binding.careGuidanceCard.visibility = View.VISIBLE
+                binding.careGuidanceTitle.text = getString(R.string.select_plant_first_title)
+                binding.careGuidanceMessage.text = getString(R.string.select_plant_first_message)
+                binding.careGuidanceAction.visibility = View.GONE
+            }
+
+            else -> {
+                binding.careGuidanceCard.visibility = View.GONE
+            }
+        }
     }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.PlantDiary.Field" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.PlantDiary.Button" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.PlantDiary.Chip" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="Widget.PlantDiary.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/plant_white_soft</item>
+        <item name="boxStrokeColor">@color/plant_outline</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextColor">@color/plant_muted</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PlantDiary.Field</item>
+    </style>
+
+    <style name="Widget.PlantDiary.PrimaryButton" parent="Widget.Material3.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="backgroundTint">@color/plant_green_dark</item>
+        <item name="rippleColor">@color/plant_green_soft</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PlantDiary.Button</item>
+    </style>
+
+    <style name="Widget.PlantDiary.TonalButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:textColor">@color/plant_green_dark</item>
+        <item name="backgroundTint">@color/plant_green_soft</item>
+        <item name="rippleColor">@color/plant_surface_alt</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PlantDiary.Button</item>
+    </style>
+
+    <style name="Widget.PlantDiary.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/plant_green_dark</item>
+        <item name="backgroundTint">@color/plant_surface_panel</item>
+        <item name="strokeColor">@color/plant_green_dark</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="rippleColor">@color/plant_green_soft</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PlantDiary.Button</item>
+    </style>
+
+    <style name="Widget.PlantDiary.FilterChip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textColor">@color/chip_filter_text</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipBackgroundColor">@color/chip_filter_bg</item>
+        <item name="chipStrokeColor">@color/chip_filter_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipMinHeight">48dp</item>
+        <item name="rippleColor">@color/plant_green_soft</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PlantDiary.Chip</item>
+    </style>
+</resources>

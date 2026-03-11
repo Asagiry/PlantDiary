@@ -17,6 +17,7 @@ import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.data.local.entity.PlantType
 import com.asagiry.plantdiary.databinding.FragmentPlantsBinding
+import com.asagiry.plantdiary.ui.common.playEntranceMotion
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -50,6 +51,9 @@ class PlantsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.plantsList.layoutManager = LinearLayoutManager(requireContext())
         binding.plantsList.adapter = adapter
+        binding.emptyPlantsAction.setOnClickListener {
+            findNavController().navigate(R.id.action_plantsFragment_to_plantFormFragment)
+        }
 
         binding.searchInput.doAfterTextChanged { text ->
             viewModel.onQueryChanged(text?.toString().orEmpty())
@@ -67,6 +71,7 @@ class PlantsFragment : Fragment() {
         binding.addPlantFab.setOnClickListener {
             findNavController().navigate(R.id.action_plantsFragment_to_plantFormFragment)
         }
+        binding.plantsContent.playEntranceMotion(listOf(binding.addPlantFab))
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -92,8 +97,12 @@ class PlantsFragment : Fragment() {
                 }
                 launch {
                     viewModel.plants.collect { items ->
-                        adapter.submitList(items)
-                        binding.emptyPlants.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+                        adapter.submitList(items) {
+                            binding.plantsList.scheduleLayoutAnimation()
+                        }
+                        val isEmpty = items.isEmpty()
+                        binding.plantsList.visibility = if (isEmpty) View.GONE else View.VISIBLE
+                        binding.emptyPlantsCard.visibility = if (isEmpty) View.VISIBLE else View.GONE
                     }
                 }
             }

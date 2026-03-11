@@ -9,6 +9,7 @@ import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.model.CareRecordWithPlant
 import com.asagiry.plantdiary.databinding.ItemScheduleRecordBinding
 import com.asagiry.plantdiary.ui.common.DateFormats
+import com.asagiry.plantdiary.ui.common.labelRes
 import java.time.LocalDate
 
 class ScheduleAdapter(
@@ -31,6 +32,7 @@ class ScheduleAdapter(
         fun bind(item: CareRecordWithPlant) {
             val context = binding.root.context
             binding.item = item
+            binding.typePill.text = context.getString(item.plant.type.labelRes())
             binding.subtitle.text =
                 when (mode) {
                     Mode.WATERING -> {

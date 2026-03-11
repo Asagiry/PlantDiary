@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.entity.PlantType
 import com.asagiry.plantdiary.databinding.FragmentPlantFormBinding
+import com.asagiry.plantdiary.ui.common.playEntranceMotion
 import com.asagiry.plantdiary.ui.common.showDatePicker
 import com.asagiry.plantdiary.ui.common.showTimePicker
 import com.google.android.material.appbar.MaterialToolbar
@@ -60,6 +61,7 @@ class PlantFormFragment : Fragment() {
                 }
             }
         }
+        binding.plantFormContent.playEntranceMotion()
     }
 
     override fun onDestroyView() {
