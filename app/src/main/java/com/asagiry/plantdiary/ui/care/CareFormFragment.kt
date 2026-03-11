@@ -51,11 +51,11 @@ class CareFormFragment : Fragment() {
             }
             val selector: AutoCompleteTextView = binding.plantSelector
             selector.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, labels))
+            updatePlantSelectorText()
+        }
 
-            val selected = plants.firstOrNull { it.id == viewModel.selectedPlantId.value }
-            if (selected != null) {
-                selector.setText(getString(R.string.record_for, selected.name, getString(selected.type.labelRes())), false)
-            }
+        viewModel.selectedPlantId.observe(viewLifecycleOwner) {
+            updatePlantSelectorText()
         }
 
         binding.plantSelector.setOnItemClickListener { _, _, position, _ ->
@@ -88,5 +88,14 @@ class CareFormFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun updatePlantSelectorText() {
+        val selected = currentPlants.firstOrNull { it.id == viewModel.selectedPlantId.value }
+        val value =
+            selected?.let { plant ->
+                getString(R.string.record_for, plant.name, getString(plant.type.labelRes()))
+            }.orEmpty()
+        binding.plantSelector.setText(value, false)
     }
 }

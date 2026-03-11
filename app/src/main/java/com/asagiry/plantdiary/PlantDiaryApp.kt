@@ -6,10 +6,10 @@ import com.asagiry.plantdiary.data.repository.PlantDiaryRepository
 
 class PlantDiaryApp : Application() {
     val repository: PlantDiaryRepository by lazy {
+        val database = PlantDiaryDatabase.getInstance(this)
         PlantDiaryRepository(
-            plantDao = PlantDiaryDatabase.getInstance(this).plantDao(),
-            careRecordDao = PlantDiaryDatabase.getInstance(this).careRecordDao(),
+            plantDao = database.plantDao(),
+            careRecordDao = database.careRecordDao(),
         )
     }
 }
-

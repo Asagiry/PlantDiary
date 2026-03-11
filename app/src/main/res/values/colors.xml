@@ -5,7 +5,5 @@
     <color name="plant_cream">#F7F4EA</color>
     <color name="plant_surface">#FFFDF7</color>
     <color name="plant_brown">#6F5E53</color>
-    <color name="plant_warning">#C26D00</color>
-    <color name="plant_error">#B3261E</color>
+    <color name="plant_leaf_accent">#88B04B</color>
 </resources>
-

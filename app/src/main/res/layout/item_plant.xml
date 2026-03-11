@@ -29,6 +29,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="@{plant.name}"
                     android:textStyle="bold" />
 
@@ -60,6 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:text="@{plant.description}" />
 
             <TextView
@@ -77,4 +81,3 @@
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
-

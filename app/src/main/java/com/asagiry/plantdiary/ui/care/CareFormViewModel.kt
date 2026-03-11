@@ -60,6 +60,13 @@ class CareFormViewModel(
                     updateSelectedPlant(record.plantId)
                 }
             }
+        } else {
+            val restoredPlantId = selectedPlantId.value ?: 0L
+            if (restoredPlantId != 0L) {
+                viewModelScope.launch {
+                    updateSelectedPlant(restoredPlantId)
+                }
+            }
         }
     }
 

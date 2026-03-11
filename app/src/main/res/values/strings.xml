@@ -49,15 +49,10 @@
     <string name="help_step_2">2. Create care records with the next watering date.</string>
     <string name="help_step_3">3. Use Schedule to see watering and planting tasks for today, tomorrow, or any day.</string>
     <string name="help_step_4">4. Use search and filters on the Plants screen.</string>
-    <string name="loading">Loading…</string>
-    <string name="not_selected">Not selected</string>
     <string name="edit">Edit</string>
     <string name="no_planting_needed">No planting date</string>
     <string name="selected_day">Selected day: %1$s</string>
-    <string name="planting_date_time">Planting date and time</string>
     <string name="record_for">%1$s (%2$s)</string>
-    <string name="watering_interval_value">%1$d days</string>
     <string name="planting_value">%1$s at %2$s</string>
     <string name="due_date_value">%1$s</string>
 </resources>
-

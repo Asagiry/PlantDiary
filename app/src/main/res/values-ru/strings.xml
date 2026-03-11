@@ -49,14 +49,10 @@
     <string name="help_step_2">2. Создай записи об уходе с датой следующего полива.</string>
     <string name="help_step_3">3. На экране расписания смотри полив и высаживание на сегодня, завтра или выбранную дату.</string>
     <string name="help_step_4">4. На экране растений используй поиск и фильтр по типу.</string>
-    <string name="loading">Загрузка…</string>
-    <string name="not_selected">Не выбрано</string>
     <string name="edit">Редактировать</string>
     <string name="no_planting_needed">Дата высаживания не нужна</string>
     <string name="selected_day">Выбранный день: %1$s</string>
-    <string name="planting_date_time">Дата и время высаживания</string>
     <string name="record_for">%1$s (%2$s)</string>
-    <string name="watering_interval_value">%1$d дн.</string>
     <string name="planting_value">%1$s в %2$s</string>
     <string name="due_date_value">%1$s</string>
 </resources>

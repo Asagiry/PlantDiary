@@ -70,9 +70,31 @@ class PlantsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.plants.collect { items ->
-                    adapter.submitList(items)
-                    binding.emptyPlants.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+                launch {
+                    viewModel.currentQuery.collect { query ->
+                        if (binding.searchInput.text?.toString() != query) {
+                            binding.searchInput.setText(query)
+                            binding.searchInput.setSelection(binding.searchInput.text?.length ?: 0)
+                        }
+                    }
+                }
+                launch {
+                    viewModel.currentFilter.collect { filter ->
+                        val selectedChipId = when (filter) {
+                            PlantType.INDOOR -> R.id.chip_indoor
+                            PlantType.GARDEN -> R.id.chip_garden
+                            null -> R.id.chip_all
+                        }
+                        if (binding.filterGroup.checkedChipId != selectedChipId) {
+                            binding.filterGroup.check(selectedChipId)
+                        }
+                    }
+                }
+                launch {
+                    viewModel.plants.collect { items ->
+                        adapter.submitList(items)
+                        binding.emptyPlants.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+                    }
                 }
             }
         }
@@ -91,4 +113,3 @@ class PlantsFragment : Fragment() {
             .show()
     }
 }
-

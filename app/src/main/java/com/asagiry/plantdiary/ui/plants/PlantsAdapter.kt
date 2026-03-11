@@ -34,8 +34,11 @@ class PlantsAdapter(
             val context = binding.root.context
             binding.plant = item
             binding.plantType.text = context.getString(item.type.labelRes())
-            binding.wateringInterval.text =
-                context.getString(R.string.watering_interval_value, item.wateringIntervalDays)
+            binding.wateringInterval.text = context.resources.getQuantityString(
+                R.plurals.watering_interval_days,
+                item.wateringIntervalDays,
+                item.wateringIntervalDays,
+            )
             binding.plantingDate.text =
                 if (item.type == com.asagiry.plantdiary.data.local.entity.PlantType.GARDEN &&
                     item.plantingDate != null &&
@@ -61,4 +64,3 @@ class PlantsAdapter(
         override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean = oldItem == newItem
     }
 }
-
