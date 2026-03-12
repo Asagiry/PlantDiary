@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Plant Diary: F5 Build and Run",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/scripts/run-plant-diary.ps1 -Mode BuildAndRun",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
