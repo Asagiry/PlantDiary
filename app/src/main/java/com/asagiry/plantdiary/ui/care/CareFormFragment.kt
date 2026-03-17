@@ -28,6 +28,7 @@ class CareFormFragment : Fragment() {
 
     private val viewModel: CareFormViewModel by viewModels { CareFormViewModel.Factory }
     private var currentPlants: List<Plant> = emptyList()
+    private var isSaving = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,12 +93,26 @@ class CareFormFragment : Fragment() {
             showTimePicker(viewModel::setPlantingTime)
         }
         binding.saveCareRecordButton.setOnClickListener {
+            if (isSaving) {
+                return@setOnClickListener
+            }
+            isSaving = true
+            binding.saveCareRecordButton.isEnabled = false
             viewLifecycleOwner.lifecycleScope.launch {
-                val errorRes = viewModel.saveCareRecord()
-                if (errorRes == null) {
-                    findNavController().navigateUp()
-                } else {
-                    Snackbar.make(binding.root, getString(errorRes), Snackbar.LENGTH_SHORT).show()
+                var shouldRestoreButton = true
+                try {
+                    val errorRes = viewModel.saveCareRecord()
+                    if (errorRes == null) {
+                        shouldRestoreButton = false
+                        findNavController().navigateUp()
+                    } else {
+                        Snackbar.make(binding.root, getString(errorRes), Snackbar.LENGTH_SHORT).show()
+                    }
+                } finally {
+                    if (shouldRestoreButton) {
+                        isSaving = false
+                        renderFormState()
+                    }
                 }
             }
         }
@@ -129,7 +144,7 @@ class CareFormFragment : Fragment() {
         binding.pickNextWateringButton.isEnabled = hasSelectedPlant
         binding.pickCarePlantingDateButton.isEnabled = isGardenPlant
         binding.pickCarePlantingTimeButton.isEnabled = isGardenPlant
-        binding.saveCareRecordButton.isEnabled = hasSelectedPlant
+        binding.saveCareRecordButton.isEnabled = hasSelectedPlant && !isSaving
 
         when {
             !hasPlants -> {

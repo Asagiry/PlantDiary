@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="watering_interval_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="confirm_delete_plant_with_records">
+        <item quantity="one">Delete this plant and %1$d related care record?</item>
+        <item quantity="other">Delete this plant and %1$d related care records?</item>
+    </plurals>
+</resources>

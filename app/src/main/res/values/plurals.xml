@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="ru">
     <plurals name="watering_interval_days">
-        <item quantity="one">%1$d day</item>
-        <item quantity="other">%1$d days</item>
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
+    <plurals name="confirm_delete_plant_with_records">
+        <item quantity="one">Удалить это растение и %1$d связанную запись об уходе?</item>
+        <item quantity="few">Удалить это растение и %1$d связанные записи об уходе?</item>
+        <item quantity="many">Удалить это растение и %1$d связанных записей об уходе?</item>
+        <item quantity="other">Удалить это растение и %1$d связанные записи об уходе?</item>
     </plurals>
 </resources>
-

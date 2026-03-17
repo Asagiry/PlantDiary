@@ -35,6 +35,9 @@ interface CareRecordDao {
     @Query("SELECT * FROM care_records WHERE id = :id LIMIT 1")
     suspend fun getCareRecordById(id: Long): CareRecord?
 
+    @Query("SELECT COUNT(*) FROM care_records WHERE plantId = :plantId")
+    suspend fun getCountForPlant(plantId: Long): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCareRecord(careRecord: CareRecord): Long
 
@@ -44,4 +47,3 @@ interface CareRecordDao {
     @Delete
     suspend fun deleteCareRecord(careRecord: CareRecord)
 }
-

@@ -1,28 +1,28 @@
-# Plant Diary Implementation
+# Реализация «Дневника растений»
 
-## Goal
-Собрать Android-приложение `Plant Diary` под требования курса и задания: Kotlin, XML, MVVM, Navigation Component, Room, Data Binding, локализация, CRUD для растений и записей ухода, календарные списки, поиск и фильтрация.
+## Цель
+Собрать Android-приложение `Дневник растений` под требования курса и задания: Kotlin, XML, MVVM, Navigation Component, Room, Data Binding, локализация, CRUD для растений и записей ухода, календарные списки, поиск и фильтрация.
 
-## Tasks
-- [x] Зафиксировать требования задания и курса в `plant-diary-task.md` -> Verify: файл есть в корне и содержит ТЗ.
-- [x] Привязать текущую папку к Git-репозиторию `Asagiry/PlantDiary` -> Verify: `git status` работает, `origin` указывает на репозиторий.
-- [x] Создать Android-проект `Plant Diary` с `applicationId` `com.asagiry.plantdiary` -> Verify: есть `settings.gradle.kts`, `app/build.gradle.kts`, `AndroidManifest.xml`.
-- [x] Настроить Navigation, Data Binding, Room и базовую архитектуру MVVM -> Verify: есть nav graph, database, dao, repository, viewmodel.
-- [x] Реализовать CRUD растений и поиск/фильтрацию -> Verify: есть список растений, форма растения, dao-методы поиска и фильтрации.
-- [x] Реализовать CRUD записей ухода и экран расписания по дате -> Verify: есть список ухода, форма ухода, экран полива/высаживания на выбранный день.
-- [x] Добавить помощь, локализацию и валидацию пользовательского ввода -> Verify: есть help screen, `values/strings.xml`, `values-ru/strings.xml`, сообщения об ошибках.
-- [x] Попробовать сгенерировать Gradle wrapper и проверить сборку настолько, насколько позволяет окружение -> Verify: `gradlew` создан, результат проверки зафиксирован.
+## Задачи
+- [x] Зафиксировать требования задания и курса в `plant-diary-task.md` -> Проверка: файл есть в корне и содержит ТЗ.
+- [x] Привязать текущую папку к Git-репозиторию `Asagiry/PlantDiary` -> Проверка: `git status` работает, `origin` указывает на репозиторий.
+- [x] Создать Android-проект `Дневник растений` с `applicationId` `com.asagiry.plantdiary` -> Проверка: есть `settings.gradle.kts`, `app/build.gradle.kts`, `AndroidManifest.xml`.
+- [x] Настроить Navigation, Data Binding, Room и базовую архитектуру MVVM -> Проверка: есть nav graph, database, dao, repository, viewmodel.
+- [x] Реализовать CRUD растений и поиск/фильтрацию -> Проверка: есть список растений, форма растения, dao-методы поиска и фильтрации.
+- [x] Реализовать CRUD записей ухода и экран расписания по дате -> Проверка: есть список ухода, форма ухода, экран полива/высаживания на выбранный день.
+- [x] Добавить помощь, локализацию и валидацию пользовательского ввода -> Проверка: есть help screen, `values/strings.xml`, `values-en/strings.xml`, сообщения об ошибках.
+- [x] Сгенерировать Gradle wrapper и проверить сборку настолько, насколько позволяет окружение -> Проверка: `gradlew` создан, результат проверки зафиксирован.
 
-## Done When
+## Критерии готовности
 - [x] В проекте есть полный Android-каркас под курс.
 - [x] Все обязательные сценарии задания реализованы.
 - [x] Ограничения и оставшиеся риски явно описаны.
 
-## Verification
+## Проверка
 - [x] `gradlew.bat help`
 - [x] `gradlew.bat :app:assembleDebug`
-- [x] GitHub Actions workflow `.github/workflows/android-apk.yml` added for APK build and release-by-tag.
+- [x] Добавлен workflow GitHub Actions `.github/workflows/android-apk.yml` для сборки APK и публикации по тегу.
 
-## Notes
+## Примечания
 - Локальная сборка подтверждена после установки Android SDK command-line tools, `platforms;android-35` и `build-tools;35.0.0`.
 - `local.properties` не коммитится и остается локальным файлом окружения.

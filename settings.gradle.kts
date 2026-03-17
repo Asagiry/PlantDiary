@@ -14,6 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Plant Diary"
+rootProject.name = "Дневник растений"
 include(":app")
-

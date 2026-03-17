@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Plant Diary: Build Debug APK",
+      "label": "Дневник растений: собрать debug APK",
       "type": "shell",
       "command": "powershell",
       "args": [
@@ -29,7 +29,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Plant Diary: Run on Emulator",
+      "label": "Дневник растений: запустить в эмуляторе",
       "type": "shell",
       "command": "powershell",
       "args": [
@@ -52,7 +52,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Plant Diary: Build and Run on Emulator",
+      "label": "Дневник растений: собрать и запустить в эмуляторе",
       "type": "shell",
       "command": "powershell",
       "args": [

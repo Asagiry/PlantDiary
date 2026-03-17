@@ -12,24 +12,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlantDao {
-    @Query(
-        """
-        SELECT * FROM plants
-        WHERE name LIKE '%' || :query || '%'
-        ORDER BY name COLLATE NOCASE
-        """,
-    )
-    fun observePlants(query: String): Flow<List<Plant>>
+    @Query("SELECT * FROM plants ORDER BY name COLLATE NOCASE")
+    fun observePlants(): Flow<List<Plant>>
 
-    @Query(
-        """
-        SELECT * FROM plants
-        WHERE name LIKE '%' || :query || '%'
-        AND type = :type
-        ORDER BY name COLLATE NOCASE
-        """,
-    )
-    fun observePlantsByType(query: String, type: PlantType): Flow<List<Plant>>
+    @Query("SELECT * FROM plants WHERE type = :type ORDER BY name COLLATE NOCASE")
+    fun observePlantsByType(type: PlantType): Flow<List<Plant>>
 
     @Query("SELECT * FROM plants ORDER BY name COLLATE NOCASE")
     fun observeAllPlantChoices(): Flow<List<Plant>>
@@ -46,4 +33,3 @@ interface PlantDao {
     @Delete
     suspend fun deletePlant(plant: Plant)
 }
-

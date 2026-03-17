@@ -115,10 +115,24 @@ class PlantsFragment : Fragment() {
     }
 
     private fun confirmDelete(plant: Plant) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setMessage(R.string.confirm_delete_plant)
-            .setPositiveButton(R.string.delete) { _, _ -> viewModel.deletePlant(plant) }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val relatedCareRecords = viewModel.getRelatedCareRecordCount(plant.id)
+            val message =
+                if (relatedCareRecords == 0) {
+                    getString(R.string.confirm_delete_plant)
+                } else {
+                    resources.getQuantityString(
+                        R.plurals.confirm_delete_plant_with_records,
+                        relatedCareRecords,
+                        relatedCareRecords,
+                    )
+                }
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(message)
+                .setPositiveButton(R.string.delete) { _, _ -> viewModel.deletePlant(plant) }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
+        }
     }
 }

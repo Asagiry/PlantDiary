@@ -51,6 +51,8 @@ class PlantsViewModel(
         }
     }
 
+    suspend fun getRelatedCareRecordCount(plantId: Long): Int = repository.getCareRecordCountForPlant(plantId)
+
     companion object {
         private const val KEY_QUERY = "query"
         private const val KEY_FILTER = "filter"

@@ -57,14 +57,14 @@ class CareFormViewModel(
                     nextWateringDate.value = record.nextWateringDate.toString()
                     plannedPlantingDate.value = record.plannedPlantingDate?.toString()
                     plannedPlantingTime.value = record.plannedPlantingTime?.toString()
-                    updateSelectedPlant(record.plantId)
+                    updateSelectedPlant(record.plantId, syncPlantingFromPlant = false)
                 }
             }
         } else {
             val restoredPlantId = selectedPlantId.value ?: 0L
             if (restoredPlantId != 0L) {
                 viewModelScope.launch {
-                    updateSelectedPlant(restoredPlantId)
+                    updateSelectedPlant(restoredPlantId, syncPlantingFromPlant = false)
                 }
             }
         }
@@ -73,7 +73,7 @@ class CareFormViewModel(
     fun onPlantSelected(plantId: Long) {
         selectedPlantId.value = plantId
         viewModelScope.launch {
-            updateSelectedPlant(plantId)
+            updateSelectedPlant(plantId, syncPlantingFromPlant = true)
         }
     }
 
@@ -117,13 +117,13 @@ class CareFormViewModel(
         return null
     }
 
-    private suspend fun updateSelectedPlant(plantId: Long) {
+    private suspend fun updateSelectedPlant(plantId: Long, syncPlantingFromPlant: Boolean) {
         val plant = if (plantId == 0L) null else repository.getPlantById(plantId)
         currentPlant.postValue(plant)
         if (plant?.type != PlantType.GARDEN) {
             plannedPlantingDate.postValue(null)
             plannedPlantingTime.postValue(null)
-        } else if (plannedPlantingDate.value == null && plannedPlantingTime.value == null) {
+        } else if (syncPlantingFromPlant) {
             plannedPlantingDate.postValue(plant.plantingDate?.toString())
             plannedPlantingTime.postValue(plant.plantingTime?.toString())
         }

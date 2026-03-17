@@ -7,15 +7,13 @@ import com.google.android.material.timepicker.TimeFormat
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.ZoneId
-import java.util.TimeZone
+import java.time.ZoneOffset
 
 fun Fragment.showDatePicker(onSelected: (LocalDate) -> Unit) {
     val picker = MaterialDatePicker.Builder.datePicker().build()
     picker.addOnPositiveButtonClickListener { utcMillis ->
-        val offset = TimeZone.getDefault().getOffset(utcMillis)
-        val localDate = Instant.ofEpochMilli(utcMillis + offset)
-            .atZone(ZoneId.systemDefault())
+        val localDate = Instant.ofEpochMilli(utcMillis)
+            .atZone(ZoneOffset.UTC)
             .toLocalDate()
         onSelected(localDate)
     }
@@ -31,4 +29,3 @@ fun Fragment.showTimePicker(onSelected: (LocalTime) -> Unit) {
     }
     picker.show(parentFragmentManager, picker.toString())
 }
-

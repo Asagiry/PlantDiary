@@ -6,21 +6,31 @@ import com.asagiry.plantdiary.data.local.entity.CareRecord
 import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.data.local.entity.PlantType
 import java.time.LocalDate
+import kotlinx.coroutines.flow.map
 
 class PlantDiaryRepository(
     private val plantDao: PlantDao,
     private val careRecordDao: CareRecordDao,
 ) {
     fun observePlants(query: String, filter: PlantType?) =
-        if (filter == null) {
-            plantDao.observePlants(query.trim())
+        (if (filter == null) {
+            plantDao.observePlants()
         } else {
-            plantDao.observePlantsByType(query.trim(), filter)
+            plantDao.observePlantsByType(filter)
+        }).map { plants ->
+            val normalizedQuery = query.trim()
+            if (normalizedQuery.isBlank()) {
+                plants
+            } else {
+                plants.filter { plant -> plant.name.contains(normalizedQuery, ignoreCase = true) }
+            }
         }
 
     fun observeAllPlantChoices() = plantDao.observeAllPlantChoices()
 
     suspend fun getPlantById(id: Long) = plantDao.getPlantById(id)
+
+    suspend fun getCareRecordCountForPlant(plantId: Long) = careRecordDao.getCountForPlant(plantId)
 
     suspend fun savePlant(plant: Plant): Long =
         if (plant.id == 0L) {
@@ -50,4 +60,3 @@ class PlantDiaryRepository(
 
     suspend fun deleteCareRecord(careRecord: CareRecord) = careRecordDao.deleteCareRecord(careRecord)
 }
-

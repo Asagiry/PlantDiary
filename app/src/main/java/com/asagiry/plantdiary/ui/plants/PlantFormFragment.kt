@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 class PlantFormFragment : Fragment() {
     private var _binding: FragmentPlantFormBinding? = null
     private val binding get() = _binding!!
+    private var isSaving = false
 
     private val viewModel: PlantFormViewModel by viewModels { PlantFormViewModel.Factory }
 
@@ -52,12 +53,26 @@ class PlantFormFragment : Fragment() {
             showTimePicker(viewModel::setPlantingTime)
         }
         binding.savePlantButton.setOnClickListener {
+            if (isSaving) {
+                return@setOnClickListener
+            }
+            isSaving = true
+            binding.savePlantButton.isEnabled = false
             viewLifecycleOwner.lifecycleScope.launch {
-                val errorRes = viewModel.savePlant()
-                if (errorRes == null) {
-                    findNavController().navigateUp()
-                } else {
-                    Snackbar.make(binding.root, getString(errorRes), Snackbar.LENGTH_SHORT).show()
+                var shouldRestoreButton = true
+                try {
+                    val errorRes = viewModel.savePlant()
+                    if (errorRes == null) {
+                        shouldRestoreButton = false
+                        findNavController().navigateUp()
+                    } else {
+                        Snackbar.make(binding.root, getString(errorRes), Snackbar.LENGTH_SHORT).show()
+                    }
+                } finally {
+                    if (shouldRestoreButton) {
+                        isSaving = false
+                        binding.savePlantButton.isEnabled = true
+                    }
                 }
             }
         }

@@ -1,36 +1,36 @@
-Plant Diary
+Дневник растений
 
-Android application for tracking plants and care schedules.
+Android-приложение для учета растений и расписания ухода.
 
-Stack:
+Стек:
 - Kotlin
-- XML layouts
+- XML-разметка
 - MVVM
 - Navigation Component
 - Room
 - Data Binding
 
-Key features:
-- CRUD for plants
-- CRUD for care records
-- Search by plant name
-- Filter by plant type
-- Watering list by date
-- Planting list by date
-- Built-in help screen
-- English and Russian localization
+Основные возможности:
+- CRUD для растений
+- CRUD для записей об уходе
+- Поиск по названию растения
+- Фильтрация по типу растения
+- Список полива по дате
+- Список высадки по дате
+- Встроенный экран помощи
+- Русская локализация по умолчанию и английская локализация как дополнительная
 
-Build notes:
-- Requires Android SDK in local environment.
-- Java 21 and Gradle are already configured on this machine.
-- Local debug build: `gradlew.bat :app:assembleDebug`
-- Debug APK output: `app/build/outputs/apk/debug/app-debug.apk`
+Сборка:
+- Нужен локально установленный Android SDK.
+- Java 21 и Gradle уже настроены на этом компьютере.
+- Локальная debug-сборка: `gradlew.bat :app:assembleDebug`
+- Debug APK: `app/build/renamed-apk/PlantDiary-debug.apk`
 
 CI/CD:
-- GitHub Actions workflow: `.github/workflows/android-apk.yml`
-- On `pull_request`, `workflow_dispatch`, and `push` the project builds a debug APK and uploads it as an artifact.
-- On tag push `v*`, the workflow also publishes `app-debug.apk` into the GitHub Release for that tag.
+- Сценарий GitHub Actions: `.github/workflows/android-apk.yml`
+- На `pull_request`, `workflow_dispatch` и `push` проект собирает debug APK и загружает его как артефакт.
+- При пуше тега `v*` workflow дополнительно публикует `PlantDiary-debug.apk` в GitHub Release для этого тега.
 
-Course references:
+Материалы курса:
 - https://github.com/ivanshchitov/android-kotlin-course
 - https://github.com/ivanshchitov/android-kotlin-course/blob/master/requirements.md
