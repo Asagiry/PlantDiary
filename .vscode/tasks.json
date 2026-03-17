@@ -39,7 +39,7 @@
         "-File",
         ".vscode/scripts/run-plant-diary.ps1",
         "-Mode",
-        "Run"
+        "RunEmulator"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -53,6 +53,75 @@
     },
     {
       "label": "Дневник растений: собрать и запустить в эмуляторе",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".vscode/scripts/run-plant-diary.ps1",
+        "-Mode",
+        "BuildAndRunEmulator"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Дневник растений: запустить на телефоне по USB",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".vscode/scripts/run-plant-diary.ps1",
+        "-Mode",
+        "RunUsb"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Дневник растений: собрать и запустить на телефоне по USB",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".vscode/scripts/run-plant-diary.ps1",
+        "-Mode",
+        "BuildAndRunUsb"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Дневник растений: собрать и запустить на USB или эмуляторе",
       "type": "shell",
       "command": "powershell",
       "args": [

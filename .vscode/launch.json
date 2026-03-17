@@ -2,10 +2,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Дневник растений: F5 собрать и запустить",
+      "name": "Дневник растений: F5 собрать и запустить на USB или эмуляторе",
       "type": "node-terminal",
       "request": "launch",
       "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/scripts/run-plant-diary.ps1 -Mode BuildAndRun",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Дневник растений: F5 собрать и запустить на телефоне по USB",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/scripts/run-plant-diary.ps1 -Mode BuildAndRunUsb",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Дневник растений: F5 собрать и запустить в эмуляторе",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/scripts/run-plant-diary.ps1 -Mode BuildAndRunEmulator",
       "cwd": "${workspaceFolder}"
     }
   ]

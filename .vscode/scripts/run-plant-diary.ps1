@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("Build", "Run", "BuildAndRun")]
+    [ValidateSet("Build", "Run", "RunUsb", "RunEmulator", "BuildAndRun", "BuildAndRunUsb", "BuildAndRunEmulator")]
     [string]$Mode = "BuildAndRun"
 )
 
@@ -131,6 +131,21 @@ function Get-RunningEmulatorSerial {
     return $null
 }
 
+function Get-ConnectedPhysicalDeviceSerial {
+    $deviceLines = & $script:Adb devices
+
+    foreach ($line in $deviceLines) {
+        if ($line -match '^([A-Za-z0-9._:-]+)\s+device$') {
+            $serial = $Matches[1]
+            if ($serial -notmatch '^emulator-\d+$') {
+                return $serial
+            }
+        }
+    }
+
+    return $null
+}
+
 function Test-AvdExists {
     $avdList = & $script:AvdManager list avd
     foreach ($line in $avdList) {
@@ -161,6 +176,27 @@ function Wait-For-EmulatorBoot {
     throw "Timed out while waiting for the emulator to boot."
 }
 
+function Wait-For-DeviceOnline {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Serial,
+        [int]$MaxAttempts = 24
+    )
+
+    & $script:Adb -s $Serial wait-for-device | Out-Null
+
+    for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+        $state = ((& $script:Adb -s $Serial get-state 2>$null) | Out-String).Trim()
+        if ($state -eq "device") {
+            return
+        }
+
+        Start-Sleep -Seconds 2
+    }
+
+    throw "Timed out while waiting for device $Serial to become online."
+}
+
 function Start-Or-ReuseEmulator {
     $serial = Get-RunningEmulatorSerial
     if ($serial) {
@@ -186,20 +222,57 @@ function Start-Or-ReuseEmulator {
 }
 
 function Install-And-LaunchApk {
-    $serial = Start-Or-ReuseEmulator
-    $apkPath = Get-DebugApkPath
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Serial
+    )
 
-    Write-Info "Installing APK: $apkPath"
-    & $script:Adb -s $serial install -r $apkPath
+    $apkPath = Get-DebugApkPath
+    Wait-For-DeviceOnline -Serial $Serial
+
+    Write-Info "Installing APK on ${Serial}: $apkPath"
+    & $script:Adb -s $Serial install -r $apkPath
     if ($LASTEXITCODE -ne 0) {
-        throw "adb install failed with exit code $LASTEXITCODE."
+        Write-Info "Install failed on $Serial. Trying clean reinstall..."
+        & $script:Adb -s $Serial uninstall $script:PackageName | Out-Null
+        & $script:Adb -s $Serial install $apkPath
+        if ($LASTEXITCODE -ne 0) {
+            throw "adb install failed with exit code $LASTEXITCODE."
+        }
     }
 
-    Write-Info "Launching $script:PackageName..."
-    & $script:Adb -s $serial shell monkey -p $script:PackageName -c android.intent.category.LAUNCHER 1 | Out-Null
+    Write-Info "Launching $script:PackageName on ${Serial}..."
+    & $script:Adb -s $Serial shell monkey -p $script:PackageName -c android.intent.category.LAUNCHER 1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to launch the application."
     }
+}
+
+function Install-And-LaunchOnUsb {
+    $serial = Get-ConnectedPhysicalDeviceSerial
+    if (-not $serial) {
+        throw "No physical Android device was found. Connect a phone with USB debugging enabled."
+    }
+
+    Write-Info "Using USB device: $serial"
+    Install-And-LaunchApk -Serial $serial
+}
+
+function Install-And-LaunchOnEmulator {
+    $serial = Start-Or-ReuseEmulator
+    Install-And-LaunchApk -Serial $serial
+}
+
+function Install-And-LaunchPreferredDevice {
+    $usbSerial = Get-ConnectedPhysicalDeviceSerial
+    if ($usbSerial) {
+        Write-Info "Using connected USB device: $usbSerial"
+        Install-And-LaunchApk -Serial $usbSerial
+        return
+    }
+
+    Write-Info "No USB device detected. Falling back to emulator."
+    Install-And-LaunchOnEmulator
 }
 
 Initialize-Environment
@@ -209,11 +282,25 @@ switch ($Mode) {
         Invoke-GradleDebugBuild
     }
     "Run" {
-        Install-And-LaunchApk
+        Install-And-LaunchPreferredDevice
+    }
+    "RunUsb" {
+        Install-And-LaunchOnUsb
+    }
+    "RunEmulator" {
+        Install-And-LaunchOnEmulator
     }
     "BuildAndRun" {
         Invoke-GradleDebugBuild
-        Install-And-LaunchApk
+        Install-And-LaunchPreferredDevice
+    }
+    "BuildAndRunUsb" {
+        Invoke-GradleDebugBuild
+        Install-And-LaunchOnUsb
+    }
+    "BuildAndRunEmulator" {
+        Invoke-GradleDebugBuild
+        Install-And-LaunchOnEmulator
     }
 }
 
