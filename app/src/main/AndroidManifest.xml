@@ -11,6 +11,7 @@
         android:theme="@style/Theme.PlantDiary">
         <activity
             android:name=".ui.MainActivity"
+            android:enableOnBackInvokedCallback="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

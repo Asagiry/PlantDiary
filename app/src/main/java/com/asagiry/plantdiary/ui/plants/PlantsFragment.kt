@@ -18,7 +18,9 @@ import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.data.local.entity.PlantType
 import com.asagiry.plantdiary.databinding.FragmentPlantsBinding
 import com.asagiry.plantdiary.ui.common.playEntranceMotion
+import com.asagiry.plantdiary.ui.common.shouldReduceMotion
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class PlantsFragment : Fragment() {
@@ -52,7 +54,11 @@ class PlantsFragment : Fragment() {
         binding.plantsList.layoutManager = LinearLayoutManager(requireContext())
         binding.plantsList.adapter = adapter
         binding.emptyPlantsAction.setOnClickListener {
-            findNavController().navigate(R.id.action_plantsFragment_to_plantFormFragment)
+            if (binding.searchFilterPanel.visibility == View.VISIBLE && binding.plantsList.visibility == View.GONE) {
+                viewModel.resetFilters()
+            } else {
+                findNavController().navigate(R.id.action_plantsFragment_to_plantFormFragment)
+            }
         }
 
         binding.searchInput.doAfterTextChanged { text ->
@@ -96,13 +102,15 @@ class PlantsFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.plants.collect { items ->
+                    combine(viewModel.plants, viewModel.hasAnyPlants) { items, hasAnyPlants ->
+                        items to hasAnyPlants
+                    }.collect { (items, hasAnyPlants) ->
                         adapter.submitList(items) {
-                            binding.plantsList.scheduleLayoutAnimation()
+                            if (!requireContext().shouldReduceMotion()) {
+                                binding.plantsList.scheduleLayoutAnimation()
+                            }
                         }
-                        val isEmpty = items.isEmpty()
-                        binding.plantsList.visibility = if (isEmpty) View.GONE else View.VISIBLE
-                        binding.emptyPlantsCard.visibility = if (isEmpty) View.VISIBLE else View.GONE
+                        renderPlantsState(items, hasAnyPlants)
                     }
                 }
             }
@@ -134,5 +142,27 @@ class PlantsFragment : Fragment() {
                 .setNegativeButton(R.string.cancel, null)
                 .show()
         }
+    }
+
+    private fun renderPlantsState(items: List<Plant>, hasAnyPlants: Boolean) {
+        val hasVisibleItems = items.isNotEmpty()
+        val showEmptySearch = hasAnyPlants && !hasVisibleItems
+        val showEmptyDiary = !hasAnyPlants
+
+        binding.plantsList.visibility = if (hasVisibleItems) View.VISIBLE else View.GONE
+        binding.searchFilterPanel.visibility = if (showEmptyDiary) View.GONE else View.VISIBLE
+        binding.emptyPlantsCard.visibility = if (showEmptySearch || showEmptyDiary) View.VISIBLE else View.GONE
+        binding.addPlantFab.visibility = if (showEmptyDiary) View.GONE else View.VISIBLE
+
+        if (showEmptySearch) {
+            binding.emptyPlantsTitle.setText(R.string.empty_search_title)
+            binding.emptyPlantsMessageView.setText(R.string.empty_search_message)
+            binding.emptyPlantsAction.setText(R.string.reset_filters)
+            return
+        }
+
+        binding.emptyPlantsTitle.setText(R.string.empty_plants_title)
+        binding.emptyPlantsMessageView.setText(R.string.empty_plants_message)
+        binding.emptyPlantsAction.setText(R.string.add_first_plant)
     }
 }

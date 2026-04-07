@@ -4,18 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.asagiry.plantdiary.PlantDiaryApp
 import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.entity.CareRecord
 import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.data.local.entity.PlantType
 import com.asagiry.plantdiary.ui.common.DateFormats
-import com.asagiry.plantdiary.ui.common.handle
-import com.asagiry.plantdiary.ui.common.repository
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlinx.coroutines.launch
@@ -124,6 +125,7 @@ class CareFormViewModel(
             plannedPlantingDate.postValue(null)
             plannedPlantingTime.postValue(null)
         } else if (syncPlantingFromPlant) {
+            // When the user picks another garden plant, reuse its planting data as a starting point.
             plannedPlantingDate.postValue(plant.plantingDate?.toString())
             plannedPlantingTime.postValue(plant.plantingTime?.toString())
         }
@@ -140,9 +142,10 @@ class CareFormViewModel(
 
         val Factory = viewModelFactory {
             initializer {
+                val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as PlantDiaryApp
                 CareFormViewModel(
-                    repository = repository(),
-                    savedStateHandle = handle(),
+                    repository = app.repository,
+                    savedStateHandle = createSavedStateHandle(),
                 )
             }
         }

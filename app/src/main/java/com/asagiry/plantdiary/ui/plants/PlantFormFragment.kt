@@ -42,7 +42,7 @@ class PlantFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val editing = arguments?.getLong(PlantFormViewModel.ARG_PLANT_ID, 0L) != 0L
         requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title =
-            getString(if (editing) R.string.edit_plant else R.string.add_plant)
+            getString(if (editing) R.string.edit_plant_title_short else R.string.add_plant_title_short)
 
         setupTypeSelector()
 

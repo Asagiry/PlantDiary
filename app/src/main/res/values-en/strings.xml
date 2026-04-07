@@ -11,6 +11,8 @@
     <string name="help_title">Help</string>
     <string name="add_plant">Add plant</string>
     <string name="edit_plant">Edit plant</string>
+    <string name="add_plant_title_short">New plant</string>
+    <string name="edit_plant_title_short">Editing</string>
     <string name="add_care_record">Add care record</string>
     <string name="edit_care_record">Edit care record</string>
     <string name="save">Save</string>
@@ -74,4 +76,21 @@
     <string name="select_plant_first_message">A care reminder unlocks only after you choose the plant it belongs to.</string>
     <string name="add_first_plant">Add first plant</string>
     <string name="create_first_care_record">Create first care record</string>
+    <string name="language_onboarding_title">Choose a language</string>
+    <string name="language_onboarding_message">Should the interface use Russian or English?</string>
+    <string name="language_option_russian">Russian</string>
+    <string name="language_option_english">English</string>
+    <string name="onboarding_title">Welcome to your plant diary</string>
+    <string name="onboarding_subtitle">Choose the interface language before the first launch. You can change it later from the help screen.</string>
+    <string name="onboarding_language_title">Interface language</string>
+    <string name="onboarding_language_message">Which language should we start with?</string>
+    <string name="onboarding_choose_russian">Russian</string>
+    <string name="onboarding_choose_english">English</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_language_hint">This choice is never locked. You can switch languages later inside the app.</string>
+    <string name="language_switch_title">Change language</string>
+    <string name="language_switch_message">You can switch the interface instantly between Russian and English.</string>
+    <string name="empty_search_title">Nothing found</string>
+    <string name="empty_search_message">Reset the search or filter to show your plants again.</string>
+    <string name="reset_filters">Reset search and filter</string>
 </resources>

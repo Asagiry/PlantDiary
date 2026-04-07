@@ -96,7 +96,7 @@ function Invoke-GradleDebugBuild {
     Write-Info "Building debug APK..."
     Push-Location $script:ProjectRoot
     try {
-        & $script:GradleWrapper ":app:assembleDebug"
+        & $script:GradleWrapper "--no-daemon" ":app:assembleDebug"
         if ($LASTEXITCODE -ne 0) {
             throw "Gradle build failed with exit code $LASTEXITCODE."
         }

@@ -5,6 +5,19 @@
     app:startDestination="@id/plantsFragment">
 
     <fragment
+        android:id="@+id/languageOnboardingFragment"
+        android:name="com.asagiry.plantdiary.ui.onboarding.LanguageOnboardingFragment"
+        android:label="@string/language_onboarding_title">
+        <action
+            android:id="@+id/action_languageOnboardingFragment_to_plantsFragment"
+            app:destination="@id/plantsFragment"
+            app:enterAnim="@anim/nav_enter"
+            app:exitAnim="@anim/nav_exit"
+            app:popEnterAnim="@anim/nav_pop_enter"
+            app:popExitAnim="@anim/nav_pop_exit" />
+    </fragment>
+
+    <fragment
         android:id="@+id/plantsFragment"
         android:name="com.asagiry.plantdiary.ui.plants.PlantsFragment"
         android:label="@string/plants_title">

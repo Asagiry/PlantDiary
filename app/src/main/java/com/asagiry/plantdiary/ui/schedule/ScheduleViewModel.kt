@@ -2,12 +2,13 @@ package com.asagiry.plantdiary.ui.schedule
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.asagiry.plantdiary.PlantDiaryApp
 import com.asagiry.plantdiary.data.local.model.CareRecordWithPlant
-import com.asagiry.plantdiary.ui.common.handle
-import com.asagiry.plantdiary.ui.common.repository
 import java.time.LocalDate
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
@@ -55,9 +56,10 @@ class ScheduleViewModel(
 
         val Factory = viewModelFactory {
             initializer {
+                val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as PlantDiaryApp
                 ScheduleViewModel(
-                    repository = repository(),
-                    savedStateHandle = handle(),
+                    repository = app.repository,
+                    savedStateHandle = createSavedStateHandle(),
                 )
             }
         }

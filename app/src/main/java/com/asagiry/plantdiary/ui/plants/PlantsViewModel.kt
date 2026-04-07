@@ -2,13 +2,14 @@ package com.asagiry.plantdiary.ui.plants
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.asagiry.plantdiary.PlantDiaryApp
 import com.asagiry.plantdiary.data.local.entity.Plant
 import com.asagiry.plantdiary.data.local.entity.PlantType
-import com.asagiry.plantdiary.ui.common.handle
-import com.asagiry.plantdiary.ui.common.repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -37,12 +38,22 @@ class PlantsViewModel(
             .flatMapLatest { (search, type) -> repository.observePlants(search, type) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
+    val hasAnyPlants: StateFlow<Boolean> =
+        repository.observeAllPlantChoices()
+            .map { items -> items.isNotEmpty() }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
+
     fun onQueryChanged(value: String) {
         savedStateHandle[KEY_QUERY] = value
     }
 
     fun onFilterChanged(value: PlantType?) {
         savedStateHandle[KEY_FILTER] = value?.name
+    }
+
+    fun resetFilters() {
+        savedStateHandle[KEY_QUERY] = ""
+        savedStateHandle[KEY_FILTER] = null
     }
 
     fun deletePlant(plant: Plant) {
@@ -59,9 +70,10 @@ class PlantsViewModel(
 
         val Factory = viewModelFactory {
             initializer {
+                val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as PlantDiaryApp
                 PlantsViewModel(
-                    repository = repository(),
-                    savedStateHandle = handle(),
+                    repository = app.repository,
+                    savedStateHandle = createSavedStateHandle(),
                 )
             }
         }

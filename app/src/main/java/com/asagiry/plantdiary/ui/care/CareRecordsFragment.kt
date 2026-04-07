@@ -17,6 +17,7 @@ import com.asagiry.plantdiary.R
 import com.asagiry.plantdiary.data.local.model.CareRecordWithPlant
 import com.asagiry.plantdiary.databinding.FragmentCareRecordsBinding
 import com.asagiry.plantdiary.ui.common.playEntranceMotion
+import com.asagiry.plantdiary.ui.common.shouldReduceMotion
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -72,7 +73,9 @@ class CareRecordsFragment : Fragment() {
                     viewModel.careRecords.collect { items ->
                         currentRecords = items
                         adapter.submitList(items) {
-                            binding.careRecordsList.scheduleLayoutAnimation()
+                            if (!requireContext().shouldReduceMotion()) {
+                                binding.careRecordsList.scheduleLayoutAnimation()
+                            }
                         }
                         renderState()
                     }

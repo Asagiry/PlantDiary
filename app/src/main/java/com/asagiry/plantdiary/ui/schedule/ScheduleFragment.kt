@@ -15,6 +15,7 @@ import com.asagiry.plantdiary.databinding.FragmentScheduleBinding
 import com.asagiry.plantdiary.ui.common.DateFormats
 import com.asagiry.plantdiary.ui.common.playEntranceMotion
 import com.asagiry.plantdiary.ui.common.showDatePicker
+import com.asagiry.plantdiary.ui.common.shouldReduceMotion
 import kotlinx.coroutines.launch
 
 class ScheduleFragment : Fragment() {
@@ -59,7 +60,9 @@ class ScheduleFragment : Fragment() {
                 launch {
                     viewModel.wateringRecords.collect { items ->
                         wateringAdapter.submitList(items) {
-                            binding.wateringList.scheduleLayoutAnimation()
+                            if (!requireContext().shouldReduceMotion()) {
+                                binding.wateringList.scheduleLayoutAnimation()
+                            }
                         }
                         binding.emptyWatering.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
                     }
@@ -67,7 +70,9 @@ class ScheduleFragment : Fragment() {
                 launch {
                     viewModel.plantingRecords.collect { items ->
                         plantingAdapter.submitList(items) {
-                            binding.plantingList.scheduleLayoutAnimation()
+                            if (!requireContext().shouldReduceMotion()) {
+                                binding.plantingList.scheduleLayoutAnimation()
+                            }
                         }
                         binding.emptyPlanting.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
                     }

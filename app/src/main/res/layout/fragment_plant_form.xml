@@ -113,11 +113,10 @@
                     android:hint="@string/plant_type"
                     app:endIconMode="dropdown_menu">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/type_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/plant_type"
                         android:inputType="none"
                         android:textColor="@color/plant_ink"
                         android:textColorHint="@color/plant_muted" />

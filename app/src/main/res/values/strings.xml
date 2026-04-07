@@ -12,6 +12,8 @@
     <string name="help_title">Помощь</string>
     <string name="add_plant">Добавить растение</string>
     <string name="edit_plant">Редактировать растение</string>
+    <string name="add_plant_title_short">Новое растение</string>
+    <string name="edit_plant_title_short">Редактирование</string>
     <string name="add_care_record">Добавить запись об уходе</string>
     <string name="edit_care_record">Редактировать запись об уходе</string>
     <string name="save">Сохранить</string>
@@ -75,4 +77,21 @@
     <string name="select_plant_first_message">Напоминание по уходу разблокируется только после выбора растения.</string>
     <string name="add_first_plant">Добавить первое растение</string>
     <string name="create_first_care_record">Создать первую запись</string>
+    <string name="language_onboarding_title">Выберите язык</string>
+    <string name="language_onboarding_message">Показывать интерфейс на русском или английском?</string>
+    <string name="language_option_russian">Русский</string>
+    <string name="language_option_english">English</string>
+    <string name="onboarding_title">Привет, это ваш дневник растений</string>
+    <string name="onboarding_subtitle">Выберите язык интерфейса перед первым запуском. Его можно сменить позже на экране помощи.</string>
+    <string name="onboarding_language_title">Язык интерфейса</string>
+    <string name="onboarding_language_message">С какого языка начнем работу?</string>
+    <string name="onboarding_choose_russian">Русский</string>
+    <string name="onboarding_choose_english">English</string>
+    <string name="onboarding_continue">Продолжить</string>
+    <string name="onboarding_language_hint">Переключение не блокируется: в любой момент его можно поменять внутри приложения.</string>
+    <string name="language_switch_title">Сменить язык</string>
+    <string name="language_switch_message">Интерфейс можно мгновенно переключить между русским и английским.</string>
+    <string name="empty_search_title">Ничего не найдено</string>
+    <string name="empty_search_message">Сбросьте поиск или фильтр, чтобы снова увидеть растения.</string>
+    <string name="reset_filters">Сбросить поиск и фильтр</string>
 </resources>

@@ -1,12 +1,36 @@
-*.iml
-.gradle
-/local.properties
-/.idea
-/.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-app/build
-repo_check/
+# Android / Gradle build output
+/.gradle/
+/build/
+/app/build/
+/captures/
+/.externalNativeBuild/
+/.cxx/
+/.kotlin/
 
+# IDE files
+/.idea/
+*.iml
+
+# Local machine config
+/local.properties
+
+# Temporary repo scratch files
+/repo_check/
+/_wrapper_tmp/
+/.tmp-uidump*.xml
+/plant-diary-task.md
+/plant-diary-implementation.md
+
+# Logs and crash dumps
+*.log
+*.tmp
+*.orig
+*.rej
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+Desktop.ini

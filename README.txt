@@ -34,3 +34,6 @@ CI/CD:
 Материалы курса:
 - https://github.com/ivanshchitov/android-kotlin-course
 - https://github.com/ivanshchitov/android-kotlin-course/blob/master/requirements.md
+
+Файл с простым объяснением проекта:
+- `PROJECT_GUIDE.md`

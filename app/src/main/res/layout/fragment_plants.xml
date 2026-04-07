@@ -58,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/search_filter_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -122,57 +123,54 @@
                 android:clipToPadding="false"
                 android:layoutAnimation="@anim/list_layout_stagger"
                 android:paddingBottom="120dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/empty_plants_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_panel_surface"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="@drawable/bg_icon_badge"
-                android:contentDescription="@null"
-                android:padding="14dp"
-                android:src="@drawable/ic_plant_leaf"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:id="@+id/empty_plants_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/empty_plants_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/empty_plants_title"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/plant_ink"
-                android:textStyle="bold" />
+                android:background="@drawable/bg_panel_surface"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/empty_plants_message_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/empty_plants_message"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                android:textColor="@color/plant_muted" />
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_badge"
+                    android:contentDescription="@null"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_plant_leaf"
+                    app:tint="@android:color/white" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/empty_plants_action"
-                style="@style/Widget.PlantDiary.PrimaryButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="@string/add_first_plant" />
+                <TextView
+                    android:id="@+id/empty_plants_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/empty_plants_title"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/plant_ink"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/empty_plants_message_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/empty_plants_message"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/plant_muted" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/empty_plants_action"
+                    style="@style/Widget.PlantDiary.PrimaryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/add_first_plant" />
+            </LinearLayout>
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
